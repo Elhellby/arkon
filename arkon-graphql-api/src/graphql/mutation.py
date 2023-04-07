@@ -1,10 +1,9 @@
 import graphene
 from graphene import String, DateTime, Int, Boolean, ObjectType
-# from app import db
 from .query import EventSchema, TicketSchema
 from src.models.eventsModel import EventModel
 from src.models.ticketsModel import TicketModel
-
+from ..utils.transform import Convert
 
 class EventMutation(graphene.Mutation):
     class Arguments:
@@ -40,11 +39,13 @@ class DeleteEventMutation(graphene.Mutation):
     success=Boolean()
 
     def mutate(self, info, id):
+        id=Convert.base64ToString(id)
         try:
-            print(id)
-            event=EventModel.objects
-            print(event[0].id)
-            EventModel.objects.get(pk=id).delete()
+            e=EventModel.objects.get(pk=id).delete()
+            if e:
+                t=TicketModel.objects(event=id)
+                if t:
+                    t.delete()
             success = True
         except Exception:
             success = False

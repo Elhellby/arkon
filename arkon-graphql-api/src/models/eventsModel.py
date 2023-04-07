@@ -2,7 +2,7 @@ from datetime import datetime
 from mongoengine import Document
 from mongoengine.fields import (
     DateTimeField, EmbeddedDocumentField, StringField, IntField, ListField,
-    ObjectIdField
+    ObjectIdField, ObjectId
 )
 
 
