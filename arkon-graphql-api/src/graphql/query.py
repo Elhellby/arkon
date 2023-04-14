@@ -15,7 +15,6 @@ class TicketSchema(MongoengineObjectType):
         interfaces = (Node,)
 
 class Query(graphene.ObjectType):
-    # node = Node.Field()
     all_events = MongoengineConnectionField(EventSchema)
     all_tickets = MongoengineConnectionField(TicketSchema)
 

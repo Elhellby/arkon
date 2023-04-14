@@ -76,7 +76,6 @@ class TicketMutation(graphene.Mutation):
 
         return TicketMutation(ticket=ticket)
 
-
 class Mutation(graphene.ObjectType):
     create_event = EventMutation.Field()
     delete_event= DeleteEventMutation.Field()
